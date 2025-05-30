@@ -3,18 +3,11 @@
 <html lang="kk">
 <head>
   <meta charset="UTF-8">
-  <title>Админ Панелі</title>
+  <title>Family Fest 2025 - Қатысушылар тізімі</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container" id="loginSection">
-    <h2>Админ кіру</h2>
-    <input type="password" id="adminPassword" placeholder="Құпия сөз">
-    <button class="glow-button" onclick="login()">Кіру</button>
-    <p id="loginError" class="error"></p>
-  </div>
-
-  <div class="container hidden" id="adminPanel">
+  <div class="container" id="adminPanel">
     <h2>Тіркелген Қатысушылар</h2>
     <p>Барлығы: <span id="totalCount">0</span></p>
     <table id="userTable">
@@ -26,17 +19,6 @@
   </div>
 
   <script>
-    function login() {
-      const password = document.getElementById('adminPassword').value;
-      if (password === '0208') {
-        document.getElementById('loginSection').classList.add('hidden');
-        document.getElementById('adminPanel').classList.remove('hidden');
-        loadUsers();
-      } else {
-        document.getElementById('loginError').innerText = 'Құпия сөз қате!';
-      }
-    }
-
     function loadUsers() {
       const users = JSON.parse(localStorage.getItem('users')) || [];
       const tableBody = document.querySelector('#userTable tbody');
@@ -48,6 +30,8 @@
       });
       document.getElementById('totalCount').innerText = users.length;
     }
+
+    window.onload = loadUsers;
   </script>
 </body>
 </html>
