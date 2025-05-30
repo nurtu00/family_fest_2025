@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <title>Админ Панелі</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container" id="loginSection">
+    <h2>Админ кіру</h2>
+    <input type="password" id="adminPassword" placeholder="Құпия сөз">
+    <button class="glow-button" onclick="login()">Кіру</button>
+    <p id="loginError" class="error"></p>
+  </div>
+
+  <div class="container hidden" id="adminPanel">
+    <h2>Тіркелген Қатысушылар</h2>
+    <p>Барлығы: <span id="totalCount">0</span></p>
+    <table id="userTable">
+      <thead>
+        <tr><th>№</th><th>Аты-жөні</th><th>Тіркелу уақыты</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    function login() {
+      const password = document.getElementById('adminPassword').value;
+      if (password === '0208') {
+        document.getElementById('loginSection').classList.add('hidden');
+        document.getElementById('adminPanel').classList.remove('hidden');
+        loadUsers();
+      } else {
+        document.getElementById('loginError').innerText = 'Құпия сөз қате!';
+      }
+    }
+
+    function loadUsers() {
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      const tableBody = document.querySelector('#userTable tbody');
+      tableBody.innerHTML = '';
+      users.forEach((user, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${index + 1}</td><td>${user.name}</td><td>${user.time}</td>`;
+        tableBody.appendChild(row);
+      });
+      document.getElementById('totalCount').innerText = users.length;
+    }
+  </script>
+</body>
+</html>

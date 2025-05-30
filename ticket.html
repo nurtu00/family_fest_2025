@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <title>Сіздің VIP Билетіңіз</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="vip-ticket">
+    <div class="vip-header">
+      <h1>🎟️ Family Fest 2025 🎟️</h1>
+      <p><strong>VIP Қонақ Билеті</strong></p>
+    </div>
+    <div class="vip-body">
+      <p><strong>Өтетін жері:</strong> <span>Nurtu House</span></p>
+      <p><strong>Уақыты:</strong> <span>16:00 - 22:00</span></p>
+      <hr>
+      <h2 id="guestName">Қонақ</h2>
+      <p class="invite-text">сізді бұл ерекше кешке шақырамыз</p>
+    </div>
+    <div class="vip-footer">
+      <p>🔐 Бұл билет тек бір адамға жарамды</p>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name');
+    document.getElementById('guestName').innerText = name ? decodeURIComponent(name) : 'Қонақ';
+  </script>
+</body>
+</html>

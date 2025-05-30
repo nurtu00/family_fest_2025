@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <title>Family Fest 2025 - Тіркелу</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Family Fest 2025</h1>
+    <p>Тіркелу үшін аты-жөніңізді жазыңыз</p>
+    <input type="text" id="firstName" placeholder="Атыңыз" required>
+    <input type="text" id="lastName" placeholder="Тегіңіз" required>
+    <button class="glow-button" onclick="register()">🎫 Билет алу</button>
+  </div>
+
+  <script>
+    function register() {
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+
+      if (!firstName || !lastName) {
+        alert('Аты-жөніңізді толтырыңыз.');
+        return;
+      }
+
+      const fullName = firstName + ' ' + lastName;
+      const timestamp = new Date().toLocaleString();
+      const user = { name: fullName, time: timestamp };
+
+      let users = JSON.parse(localStorage.getItem('users')) || [];
+      users.push(user);
+      localStorage.setItem('users', JSON.stringify(users));
+
+      const encodedName = encodeURIComponent(fullName);
+      window.location.href = 'ticket.html?name=' + encodedName;
+    }
+  </script>
+</body>
+</html>
